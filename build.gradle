@@ -1,0 +1,71 @@
+buildscript {
+    repositories { 
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+//        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.9.2'
+        //classpath 'org.kordamp.gradle:stats-gradle-plugin:0.2.2'
+    }
+}
+
+plugins { 
+    id 'io.franzbecker.gradle-lombok' version '1.14'
+//    id "io.spring.dependency-management" version "1.0.8.RELEASE" 
+//    id "com.github.kt3k.coveralls" version "2.8.1" 
+//    id "org.owasp.dependencycheck" version "3.1.2"
+//    id "org.asciidoctor.convert" version "1.5.3"
+//    id 'net.researchgate.release' version '2.8.1'
+}
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'io.franzbecker.gradle-lombok'
+
+description = 'RESTful implementation of DOIP(v2) protocol.'
+    group = 'edu.kit.doip.server'
+
+println "Building ${name} version: ${version}"
+
+
+repositories {
+    mavenLocal() 
+    jcenter()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal() 
+    jcenter()
+    mavenCentral()
+}
+
+lombok {
+    version = '1.18.10'
+    sha256 = ""
+}
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+//  Generating OAS3 on the fly
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.6")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.5.6")
+    implementation("org.springdoc:springdoc-openapi-webmvc-core:1.5.6")
+//  Add Production-grade Services
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    // thymeleaf
+//    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    // driver for postgres
+//    implementation "org.postgresql:postgresql:42.2.1"
+    //driver for h2
+//    implementation "com.h2database:h2:1.4.200"
+    // dependencies for tests only
+    testImplementation     'junit:junit:4.13'
+}
